@@ -1,17 +1,18 @@
 pipeline {
     agent any
-    stages {
-        stage('Checkout code') {
-            steps {
-                echo 'Just checking out the code'
+
+    stages{
+        stage('Checkout the code'){
+            steps{
+                echo 'checking the code'
             }
         }
     }
-    stage('Building AN AMI USING PACKER'){
+    stage('BUILDING AN AMI'){
         steps{
-            sh 'cd corp_packer_demo'{
+            echo 'Building an ami using packer'
             sh 'packer-tf.sh'
-            }
+            sleep 3
         }
     }
 }
