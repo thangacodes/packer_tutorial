@@ -15,7 +15,7 @@ pipeline {
                 sh 'sleep 5'
                 sh 'sudo chmod +x packer-tf.sh'
                 sh 'sleep 5'
-                sh 'packer-tf.sh'
+                sh 'sudo sh packer-tf.sh'
             }
         }
     }
