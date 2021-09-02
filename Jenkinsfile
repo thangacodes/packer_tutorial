@@ -7,14 +7,13 @@ pipeline {
                 echo 'checking the code'
             }
         }
-    }
-        stage{
+        stage('Building an AMI'){
             steps{
-                dir('./packer_ami_build')
-                sh 'ls -lrth'
-                sh 'sleep 2'
+                echo 'starting the packer process'
                 sh 'pwd'
+                sh 'ls -lrth'
                 sh 'packer-tf.sh'
+            }
         }
     }
 }
