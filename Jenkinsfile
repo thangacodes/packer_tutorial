@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout code') {
             steps {
@@ -8,11 +7,9 @@ pipeline {
             }
         }
     }
-    stage {
-        stage('Building an AMI'){
-            steps{
-                echo 'About to start the build process'
-                dir('./corp_packer_demo')
+    stage('Building AN AMI USING PACKER'){
+        steps{
+            dir('./corp_packer_demo'){
                 sh 'packer-tf.sh'
             }
         }
