@@ -8,11 +8,4 @@ pipeline {
             }
         }
     }
-    stage('BUILDING AN AMI'){
-        steps{
-            echo 'Building an ami using packer'
-            sh 'packer-tf.sh'
-            sleep 3
-        }
-    }
 }
