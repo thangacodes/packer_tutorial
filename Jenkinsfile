@@ -8,4 +8,13 @@ pipeline {
             }
         }
     }
+    stage{
+        steps{
+            dir('./packer_ami_build')
+            sh 'ls -lrth'
+            sh 'sleep 2'
+            sh 'pwd'
+            sh 'packer-tf.sh'
+        }
+    }
 }
