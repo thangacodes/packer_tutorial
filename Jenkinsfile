@@ -14,7 +14,7 @@ pipeline {
                 pwd
                 ls -lrth
                 sleep 5
-                packer-tf.sh
+                ./packer-tf.sh
                 sleep 5
                 '''
             }
