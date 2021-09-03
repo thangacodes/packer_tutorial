@@ -12,5 +12,5 @@ These are commands that will be getting executed during AMI build using Packer
  * terraform plan
  * terraform apply --auto-approve
  
- To perform these steps, i made a small shell script to perform these operations. 
+ To perform these steps, i made a small shell script to perform these operations. There is no manual interven required.
 
