@@ -13,6 +13,6 @@ terraform init
 terraform fmt
 terraform validate
 terraform plan
-terraform apply --auto-approve
+#terraform apply --auto-approve
 echo "successfully completed packer with terraform script. Please go and check on aws"
 exit
