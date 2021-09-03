@@ -2,6 +2,8 @@
 set -x #You can get the shell to echo everything it is doing
 echo "Shell Script to play around with Packer and invoke Terraform scripts"
 sudo cd /usr/bin/packer
+pwd
+sleep 10
 packer init .
 packer validate ubuntu.json
 packer build ubuntu.json > bake.txt
