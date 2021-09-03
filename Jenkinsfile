@@ -13,9 +13,8 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -lrth'
                 sh 'sleep 5'
-                sh 'sudo chmod +x packer-tf.sh'
+                sh 'sudo packer-tf.sh'
                 sh 'sleep 5'
-                sh 'sudo sh packer-tf.sh'
             }
         }
     }
