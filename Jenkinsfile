@@ -10,11 +10,13 @@ pipeline {
         stage('Building an AMI'){
             steps{
                 echo 'starting the packer process'
-                sh 'pwd'
-                sh 'ls -lrth'
-                sh 'sleep 5'
-                sh 'packer-tf.sh'
-                sh 'sleep 5'
+                sh '''
+                pwd
+                ls -lrth
+                sleep 5
+                packer-tf.sh
+                sleep 5
+                '''
             }
         }
     }
