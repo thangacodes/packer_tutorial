@@ -5,6 +5,7 @@ These are commands that will be getting executed during AMI build using Packer
  * packer fmt
  * packer validate 
  * packer build ebs.json
+ * packer build -var-file=vars.json template.json
  
  Terraform Scripts begin after the ami is created.
  * terraform init
