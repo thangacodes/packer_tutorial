@@ -20,18 +20,30 @@
                 ],
                 "most_recent": true
             },
-            "instance_type": "t2.micro"
+            "instance_type": "t2.micro",
             "ssh_username": "{{user `ssh_username`}}",
             "ami_name": "packer-example {{timestamp}}",
             "tags":{
-                "name: Thangadurai- {{timestamp}}"
+                "name": "Thangadurai- {{timestamp}}"
             }
         }
     ],
     "provisioners": [
         {
+            "type": "file",
+            "source": "./welcomefile",
+            "destination": "/home/ec2-user/"
+        },
+        {
             "type": "shell",
-            "script": "apache.sh"
+            "inline":[
+                "ls -al /home/ec2-user",
+                "cat /home/ec2-user/welcomefile"
+            ]
+        },
+        {
+            "type": "shell",
+            "script": "./apache.sh"
         }
     ]
 }
