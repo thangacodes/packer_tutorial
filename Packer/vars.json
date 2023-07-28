@@ -1,0 +1,14 @@
+{
+    "REGION": "ap-south-1",
+    "AMI_ID": "ami-0ded8326293d3201b",
+    "INSTANCE_TYPE": "t2.micro",
+    "SGP_ID": "sg-0fb1052b659369aa8",
+    "KEYPAIR_NAME": "admin",
+    "SSH_USER_NAME": "ec2-user",
+    "PRIVATE_KEY_FILE": "admin.pem",
+    "NAME": "My_first_packer_ami_image",
+    "BUILTBY": "Packer_v1.9.2",
+    "ENVIRONMENT": "Development",
+    "CREATIONDATE": "28/07/2023",
+    "OWNER": "Thangadurai.murugan@example.com"
+}

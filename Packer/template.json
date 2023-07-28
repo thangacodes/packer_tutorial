@@ -1,0 +1,53 @@
+{
+  "variables":
+  {
+    "REGION": "ap-south-1",
+    "AMI_ID": "ami-0ded8326293d3201b",
+    "INSTANCE_TYPE": "t2.micro",
+    "SGP_ID": "sg-0fb1052b659369aa8",
+    "KEYPAIR_NAME": "admin",
+    "SSH_USER_NAME": "ec2-user",
+    "PRIVATE_KEY_FILE": "admin.pem",
+    "NAME": "My_first_packer_ami_image",
+    "BUILTBY": "Packer_v1.9.2",
+    "ENVIRONMENT": "Development",
+    "CREATIONDATE": "28/07/2023",
+    "OWNER": "Thangadurai.murugan@example.com"
+  },
+    "builders": [{
+        "type": "amazon-ebs",
+        "region": "{{user `REGION`}}",
+        "source_ami": "{{user `AMI_ID` }}",
+        "instance_type": "{{user `INSTANCE_TYPE` }}",
+        "ssh_username": "{{user `SSH_USER_NAME`}}",
+        "ami_name": "{{user `NAME`}}",
+        "associate_public_ip_address": "true",
+        "security_group_id":"{{user `SGP_ID` }}",
+        "ssh_keypair_name": "{{ user `KEYPAIR_NAME`}}",
+        "ssh_private_key_file": "{{user `PRIVATE_KEY_FILE`}}",
+        "tags":{
+          "Name": "{{user `NAME`}}",
+          "BuiltBy": "{{user `BUILTBY`}}",
+          "Environment": "{{user `ENVIRONMENT`}}",
+          "CreationDate": "{{user `CREATIONDATE`}}",
+          "Owner": "{{user `OWNER`}}"
+        }
+      }],
+        "provisioners": [{
+              "type": "shell",
+              "inline": [
+                  "echo 'Sleeping for 30 seconds to give amazon machine time to Initialize'",
+                  "sleep 30",
+                  "sudo yum update -y",
+                  "sudo yum install -y git",
+                  "sudo yum install -y wget",
+                  "sudo yum install -y java"
+            ]
+          },
+          {
+              "type": "file",
+              "source": "./apache_tomcat.sh",
+              "destination": "/home/ec2-user/apache_tomcat.sh"
+          }
+      ]
+}
