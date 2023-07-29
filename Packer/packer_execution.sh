@@ -10,7 +10,7 @@ if [[ ${PERFORM} == "PVD" ]];
 then
 echo "${PVD} in progress..."
 ${PVD} ${FILE}
-elif [[${{PERFORM}} == "PVB" ]];
+elif [[ ${PERFORM} == "PVB" ]];
 then
 echo "${PVB} in progress..."
 ${PVB} ${FILE}
@@ -18,4 +18,3 @@ else
 echo "You entered wrong input. Please correct yourself and try again..."
 fi
 exit
-
