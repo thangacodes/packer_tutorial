@@ -1,11 +1,13 @@
 corp_packer_demo
 
-These are commands that will be getting executed during AMI build using Packer
- * packer init .
+These are the commands that will be getting executed during custom amazon machine image creation by Hashicorp Packer build tool.
+ * packer init
  * packer fmt
  * packer validate 
  * packer build ebs.json
  * packer build -var-file=vars.json template.json
+
+# Note: You write up all the configuration in a json files.
  
  Terraform Scripts begin after the ami is created.
  * terraform init
