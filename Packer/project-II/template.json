@@ -42,7 +42,8 @@
                     "sudo yum install -y git",
                     "sudo yum install -y wget",
                     "sudo yum install -y java",
-                    "sudo yum install -y nginx"
+                    "sudo yum install -y nginx",
+		    "sudo systemctl enable nginx"
               ]
             },
             {
