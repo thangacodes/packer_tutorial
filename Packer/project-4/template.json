@@ -29,6 +29,11 @@
                 "source": "index.html",
                 "destination": "/tmp/"
               },
+	      {
+		"type": "file",
+		"source": "welcomefile",
+		"destination": "/home/ec2-user"
+	      },
               {
                 "type": "shell",
                 "inline": ["sudo cp /tmp/index.html /usr/share/nginx/html/"]
