@@ -46,8 +46,8 @@
               {
                 "type": "shell",
                 "inline": [
-	          "echo 'Copying index.html file from /tmp/ directory /var directory'",
-                  "sudo cp /tmp/index.html /var/www/html/"
+	          "echo 'Copying index.html file from /tmp/ directory /usr/share/nginx/html directory'",
+                  "sudo cp /tmp/index.html /usr/share/nginx/html/"
                 ]
               }
         ]
