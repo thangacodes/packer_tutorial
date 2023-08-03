@@ -11,8 +11,8 @@ Packer Demo:
 
 4) Here is the command to execute packer validate/build from a Windows Machine.
 
-# packer validate -var-file .\variables.json .\template.json  ==> validate the config files
-# packer build -var-file .\variables.json .\template.json ==> build the image
+// packer validate -var-file .\variables.json .\template.json  ==> validate the config files
+// packer build -var-file .\variables.json .\template.json ==> build the image
 
 
 
