@@ -47,7 +47,7 @@
             },
             {
               "type": "file",
-              "source": "ansible_playbook/ping.yml",
+              "source": "ansible_playbook/common_linux_task.yml",
               "destination": "/tmp/"
              },
             {
@@ -66,8 +66,8 @@
                 "sudo ls -lrth /usr/share/nginx/html",
                 "sleep 5",
                 "echo 'Executing Ansible playbook'",
-                "ansible-playbook /tmp/ping.yml --syntax-check",
-                "ansible-playbook /tmp/ping.yml"
+                "ansible-playbook /tmp/common_linux_task.yml --syntax-check",
+                "ansible-playbook /tmp/common_linux_task.yml"
               ]
              }
         ]
