@@ -1,0 +1,74 @@
+{
+"builders": [{
+          "type": "amazon-ebs",
+          "region": "{{user `REGION`}}",
+          "source_ami": "{{user `AMI_ID` }}",
+          "instance_type": "{{user `INSTANCE_TYPE` }}",
+          "ssh_username": "{{user `SSH_USER_NAME`}}",
+          "ami_name": "{{user `NAME`}}",
+          "associate_public_ip_address": "true",
+          "security_group_id":"{{user `SGP_ID` }}",
+          "ssh_keypair_name": "{{ user `KEYPAIR_NAME`}}",
+          "ssh_private_key_file": "{{user `PRIVATE_KEY_FILE`}}",
+          "tags":{
+            "Name": "{{user `NAME`}}",
+            "BuiltBy": "{{user `BUILTBY`}}",
+            "Environment": "{{user `ENVIRONMENT`}}",
+            "CreationDate": "{{user `CREATIONDATE`}}",
+            "Owner": "{{user `OWNER`}}",
+            "CostCenter": "{{user `CostCenter`}}"
+          }
+}],
+          "provisioners": [
+             {
+                "type": "shell",
+                "inline": [
+                    "echo 'EC2 instance initialization in progress. Please wait for 30 seconds...'",
+                    "sleep 30",
+                    "sudo yum update -y",
+                    "echo 'Checking Python version on Amazon EC2 machine...'",
+                    "python3 --version",
+                    "echo 'Installing NGINX package now...'",
+                    "sudo amazon-linux-extras install nginx1 -y",
+                    "sudo systemctl start nginx",
+                    "sudo systemctl enable nginx",
+                    "sudo systemctl status nginx",
+                    "echo 'Wait for 5 seconds....'",
+                    "sleep 5",
+                    "echo 'Checking ansible version on Amazon EC2 machine...'",
+                    "sudo amazon-linux-extras install ansible2 -y",
+                    "ansible --version"
+              ]
+            },
+            {
+             "type": "file",
+             "source": "./welcomefile",
+             "destination": "/home/ec2-user/welcomefile"
+            },
+            {
+              "type": "file",
+              "source": "ansible_playbook/ping.yml",
+              "destination": "/tmp/"
+             },
+            {
+              "type": "file",
+              "source": "./index.html",
+              "destination": "/tmp/"
+             },
+             {
+              "type": "shell",
+              "inline":[
+                "echo 'Copying html file to /usr/ directory'",
+                "sudo cp /tmp/index.html /usr/share/nginx/html/",
+                "sleep 4",
+                "echo 'Listing out the files in /home/ec2-user/ directory'",
+                "sudo ls -lrth /home/ec2-user",
+                "sudo ls -lrth /usr/share/nginx/html",
+                "sleep 5",
+                "echo 'Executing Ansible playbook'",
+                "ansible-playbook /tmp/ping.yml --syntax-check",
+                "ansible-playbook /tmp/ping.yml"
+              ]
+             }
+        ]
+}

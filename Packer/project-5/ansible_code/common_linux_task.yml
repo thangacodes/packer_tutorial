@@ -1,0 +1,24 @@
+- name: Checking the uptime
+  hosts: localhost
+  become_user: ec2-user
+  gather_facts: true
+  become: yes
+  tasks:
+  - name: Checking uptime of the server
+    shell: uptime -p
+    register: system_uptime
+  - name: Print uptime of managed node
+    debug:
+      msg: "{{ system_uptime }}"
+  - name: Checking ping connectivity
+    ping:
+    register: ping_out
+  - name: Print ping output for node
+    debug:
+      msg: "{{ ping_out }}"
+  - name: Listing out block devices attached to the EC2 instance
+    command: lsblk
+    register: lbk_out
+  - name: lsblk output
+    debug:
+      msg: "{{ lbk_out }}"
