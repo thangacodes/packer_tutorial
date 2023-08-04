@@ -47,7 +47,7 @@
              },
             {
               "type": "file",
-              "source": "ansible/playbook1.yml",
+              "source": "ansible/playbook.yml",
               "destination": "/tmp/"
              },
             {
@@ -73,12 +73,12 @@
                 "cat /home/ec2-user/task_details",
                 "echo 'Executing Ansible Adhoc commands and playbook.....'",
                 "ansible -m ping localhost -o",
-                "sudo cp /tmp/playbook1.yml /var/ansible",
+                "sudo cp /tmp/playbook.yml /var/ansible",
                 "sudo cp /tmp/common_vars.yml /var/ansible/group_vars",
                 "sudo tree /var/ansible",
                 "sudo ls -lrth /var/ansible/",
                 "sudo ls -lrth /var/ansible/group_vars",
-                "ansible-playbook /var/ansible/playbook1.yml"
+                "ansible-playbook /var/ansible/playbook.yml"
               ]
              }
       ]
