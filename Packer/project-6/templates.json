@@ -1,0 +1,85 @@
+{
+"builders": [{
+          "type": "amazon-ebs",
+          "region": "{{user `REGION`}}",
+          "source_ami": "{{user `AMI_ID` }}",
+          "instance_type": "{{user `INSTANCE_TYPE` }}",
+          "ssh_username": "{{user `SSH_USER_NAME`}}",
+          "ami_name": "{{user `NAME`}}",
+          "associate_public_ip_address": "true",
+          "security_group_id":"{{user `SGP_ID` }}",
+          "ssh_keypair_name": "{{ user `KEYPAIR_NAME`}}",
+          "ssh_private_key_file": "{{user `PRIVATE_KEY_FILE`}}",
+          "tags":{
+            "Name": "{{user `NAME`}}",
+            "BuiltBy": "{{user `BUILTBY`}}",
+            "Environment": "{{user `ENVIRONMENT`}}",
+            "CreationDate": "{{user `CREATIONDATE`}}",
+            "Owner": "{{user `OWNER`}}",
+            "CostCenter": "{{user `CostCenter`}}"
+          }
+}],
+          "provisioners": [
+             {
+                "type": "shell",
+                "inline": [
+                    "echo 'EC2 initialization in progress. Please be patience for another 60 seconds...'",
+                    "sleep 60",
+                    "sudo yum update -y",
+                    "echo 'Checking Python version on Amazon EC2 machine...'",
+                    "python3 --version",
+                    "echo 'Installing and Checking ansible version on Amazon2 Linux EC2 machine...'",
+                    "sudo amazon-linux-extras install ansible2 -y",
+                    "ansible --version",
+                    "echo 'Again taking 5 seconds break...'",
+                    "sleep 5"
+              ]
+            },
+            {
+             "type": "file",
+             "source": "./task_details",
+             "destination": "/home/ec2-user/task_details"
+            },
+            {
+              "type": "file",
+              "source": "index.html",
+              "destination": "/tmp/"
+             },
+            {
+              "type": "file",
+              "source": "ansible/playbook1.yml",
+              "destination": "/tmp/"
+             },
+            {
+              "type": "file",
+              "source": "ansible/group_vars/common_vars.yml",
+              "destination": "/tmp/"
+             },
+             {
+              "type": "shell",
+              "inline":[
+                "echo 'Installing Tree binary on linux machine'",
+                "sudo yum install -y tree",
+                "echo 'Creating directory and sub-directories under /var/....'",
+                "sudo mkdir /var/ansible",
+                "sudo mkdir /var/ansible/group_vars",
+                "sudo mkdir -p /var/www/html",
+                "sudo ls -lrth /var/",
+                "tree /var/ansible/",
+                "tree /var/www/",
+                "sleep 10",
+                "echo 'Viewing content of task_details under /home/ec2-user directory....'",
+                "ls -lrth /home/ec2-user",
+                "cat /home/ec2-user/task_details",
+                "echo 'Executing Ansible Adhoc commands and playbook.....'",
+                "ansible -m ping localhost -o",
+                "sudo cp /tmp/playbook1.yml /var/ansible",
+                "sudo cp /tmp/common_vars.yml /var/ansible/group_vars",
+                "sudo tree /var/ansible",
+                "sudo ls -lrth /var/ansible/",
+                "sudo ls -lrth /var/ansible/group_vars",
+                "ansible-playbook /var/ansible/playbook1.yml"
+              ]
+             }
+      ]
+}

@@ -1,0 +1,35 @@
+---
+- name: Just playing with group_variables substitution
+  hosts: "{{ HOSTS }}"
+  gather_facts: yes
+  become: yes
+  become_user: "{{ USER }}"
+  vars_files:
+    - "group_vars/common_vars.yml"
+  tasks:
+    - name: Calling the vars substitution
+      shell: echo "Hello {{ IMPLEMENTOR }}, you are working on a {{ CHANGE }} with an environment of {{ ENVIRONMENT }} and a CR of {{ CHANGE_NUMBER }} and an execution location of {{ LOCATION }}"
+      register: demo_out
+    - debug: msg="{{ demo_out.stdout }}"
+    - name: "Installing httpd binary in Amazon Linux 2 OS..."
+      shell: yum install -y httpd
+      register: httpd_install
+    - debug: msg="{{ httpd_install }}"
+    - name: "Starting the httpd serive"
+      shell: systemctl start httpd.service
+      register: httpd_start
+    - debug: msg="{{ httpd_start }}"
+    - name: "Configured to start at boot the httpd service..."
+      shell: systemctl enable httpd.service
+      register: service_enable
+    - debug: msg="{{ service_enable }}"
+    - name: "Copying index.html file..."
+      copy:
+        src: /tmp/index.html
+        dest: /var/www/html/index.html
+      register: html_copy
+    - debug: msg="{{ html_copy }}"
+    - name: "Restarting httpd service..."
+      shell: systemctl restart httpd
+      register: httpd_ser
+    - debug: msg="{{ httpd_ser }}"
