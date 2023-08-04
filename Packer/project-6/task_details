@@ -1,0 +1,6 @@
+Here is the task details..., 
+a) First uploading files from local directory to the remote machine.
+b Then performing necessary tasks using file, shell provisioners in Packer.
+c) Ansible playbook kicks in.
+d) You get an AMI based on tags that you set for AMI and Snapshot too.
+e) You may create a new EC2 vm from the custom image
