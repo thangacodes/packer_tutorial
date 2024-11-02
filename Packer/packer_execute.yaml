@@ -1,0 +1,21 @@
+- name: Setup permanent aliases
+  hosts: localhost
+  tasks:
+  - name: Create a script to set up aliases
+    copy:
+      dest: /tmp/setup_aliases.sh
+      content: |
+        #!/bin/bash
+        echo "The script execution time is: $(date '+%Y-%m-%d %H:%M:%S')"
+        # Define aliases
+        echo "alias pv='packer validate'" >> ~/.bashrc
+        echo "alias pb='packer build'" >> ~/.bashrc
+        # Source the updated .bashrc
+        source ~/.bashrc
+        # Output existing aliases to a file for verification
+        alias >/tmp/alias.txt
+      mode: '0755'
+  - name: Execute the alias setup script
+    command: /tmp/setup_aliases.sh
+    become: yes
+    become_user: ec2-user
