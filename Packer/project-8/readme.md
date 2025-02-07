@@ -1,5 +1,5 @@
 ```bash
-How to build a custom image in AWS?
+How to build a custom image in AWS using Hashicorp Packer?
 
 1) Clone the repository
    git clone https://github.com/thangacodes/packer_tutorial.git
